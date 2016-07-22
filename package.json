@@ -1,0 +1,15 @@
+{
+  "name": "mongoose-sleuth",
+  "version": "1.0.0",
+  "description": "VCR like record and playback for mongoose",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha test/**/*.spec.js"
+  },
+  "author": "Cody Coljee-Gray <cody.cg@gmail.com>",
+  "license": "ISC",
+  "devDependencies": {
+    "chai": "^3.5.0",
+    "mocha": "^2.5.3"
+  }
+}
