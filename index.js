@@ -14,7 +14,7 @@ module.exports.config = function (options) {
   config.mongoose = options.mongoose;
 }
 
-// Adds a spies and preloads the cassette data.
+// Adds spies and preloads the cassette data.
 module.exports.linkMongoose = function linkMongoose(mongoose, done) {
 
   // Spy on the exec funtion.
@@ -45,10 +45,10 @@ function addSpy(obj, method, func) {
 
   var spyMethod = obj[method] = function vcrSpy() {
 
-    // dangerously specific to this implementation of mongoogse (~4.4.14)
+    // dangerously specific to this implementation of mongoogse (4.4.14)
     var op = this.op;
     var cond = this.getQuery();
-    
+
     switch (config.mode) {
       case 'record':
         var realResult = realMethod.apply(this, arguments);
@@ -62,12 +62,12 @@ function addSpy(obj, method, func) {
         break;
     }
   }
-  
+
   // Unwrap the spy.
   spyMethod.restore = function() {
     obj[method] = realMethod;
   }
-  
+
   // Take note of all restores.
   restores.push(spyMethod.restore);
 }
@@ -91,10 +91,10 @@ function playback(op, conditions, args) {
   return new Promise(function(resolve, reject) {
     var key = getCassetKey(op, conditions);
     var data = cassette[key];
-    
-    // dangerously specific to this implementation of mongoogse (~4.4.14)
+
+    // dangerously specific to this implementation of mongoogse (4.4.14)
     var callback = args && args[0];
-    
+
     if (data) {
       callback && callback(null, data);
       resolve(data);

@@ -1,6 +1,6 @@
 {
   "name": "mongoose-sleuth",
-  "version": "1.0.0",
+  "version": "0.0.1",
   "description": "VCR like record and playback for mongoose",
   "main": "index.js",
   "scripts": {
@@ -10,6 +10,15 @@
   "license": "ISC",
   "devDependencies": {
     "chai": "^3.5.0",
-    "mocha": "^2.5.3"
-  }
+    "mocha": "^2.5.3",
+    "mongoose": "4.4.14"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/codr/mongoose-sleuth.git"
+  },
+  "bugs": {
+    "url": "https://github.com/codr/mongoose-sleuth/issues"
+  },
+  "homepage": "https://github.com/codr/mongoose-sleuth#readme"
 }
