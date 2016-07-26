@@ -4,14 +4,15 @@
   "description": "VCR like record and playback for mongoose",
   "main": "index.js",
   "scripts": {
-    "test": "mocha test/**/*.spec.js"
+    "test": "mocha test/**/*.test.js"
   },
   "author": "Cody Coljee-Gray <cody.cg@gmail.com>",
   "license": "ISC",
   "devDependencies": {
     "chai": "^3.5.0",
     "mocha": "^2.5.3",
-    "mongoose": "4.4.14"
+    "mongoose": "4.4.14",
+    "pow-mongoose-fixtures": "^0.3.0"
   },
   "repository": {
     "type": "git",

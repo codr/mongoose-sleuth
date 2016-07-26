@@ -14,11 +14,10 @@ module.exports.config = function (options) {
   config.mongoose = options.mongoose;
 }
 
-// Adds spies and preloads the cassette data.
-module.exports.linkMongoose = function linkMongoose(mongoose, done) {
+module.exports.start = function(done) {
 
   // Spy on the exec funtion.
-  addSpy(mongoose.Query.prototype, 'exec');
+  addSpy(config.mongoose.Query.prototype, 'exec');
 
   if (config.mode === 'playback') {
     // preload the file.
@@ -33,15 +32,21 @@ module.exports.linkMongoose = function linkMongoose(mongoose, done) {
 
 }
 
-module.exports.unlinkMongoose = function unlinkMongoose(mongoose) {
+module.exports.stop = function() {
+
+  // Restore all the spied mthods to the original condition.
   restores.forEach(function(restore) {
     restore();
   });
   restores = [];
+
 }
 
 function addSpy(obj, method, func) {
   var realMethod = obj[method];
+
+  // don't add a second spy.
+  if (realMethod.name === 'vcrSpy') return;
 
   var spyMethod = obj[method] = function vcrSpy() {
 
@@ -107,10 +112,12 @@ function playback(op, conditions, args) {
   });
 }
 
+// Get the key for a given query
 function getCassetKey(op, conditions) {
   return op + '-' + JSON.stringify(conditions);
 }
 
+// get the full path to save / read cassettes
 function getFullPath() {
   return path.join(config.cassetteDir, 'mongooseCassette.json');
 }
